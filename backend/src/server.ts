@@ -81,7 +81,7 @@ app.post(personURL + '/update',
         });
         if (p.matchedCount === 0)
             documentNotFoundError(req.body._id);
-        res.status(200).send(p);
+        res.status(200).send({...p, _id: req.body._id});
 });
 
 app.post(personURL + '/delete',

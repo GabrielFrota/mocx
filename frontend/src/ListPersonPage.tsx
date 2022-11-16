@@ -52,7 +52,8 @@ const ListPersonPage = () => {
             body: JSON.stringify({_id: id})
         }));
         const results = await Promise.all(fetches);
-        const bodies = await Promise.all(results.map(r => r.json()));
+        const deleted = results.filter(r => r.status === 200);
+        const bodies = await Promise.all(deleted.map(r => r.json()));
         setPeople(people.filter(p => bodies.every(b => p._id !== b._id)));
     }
 

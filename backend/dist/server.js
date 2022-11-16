@@ -72,7 +72,7 @@ app.post(personURL + '/update', (0, express_validator_1.body)('_id').exists(), (
     });
     if (p.matchedCount === 0)
         documentNotFoundError(req.body._id);
-    res.status(200).send(p);
+    res.status(200).send(Object.assign(Object.assign({}, p), { _id: req.body._id }));
 }));
 app.post(personURL + '/delete', (0, express_validator_1.body)('_id').exists(), validateReq, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const p = yield Person_1.default.deleteOne({ _id: req.body._id });
