@@ -6,6 +6,7 @@ import { Request, Response } from 'express';
 import Person from "./Person";
 import mongoose from 'mongoose';
 import {body, validationResult} from "express-validator";
+import console_stamp from "console-stamp";
 
 const port = 8080;
 const app = express();
@@ -18,7 +19,7 @@ mongoose.connect(uri, { dbName: 'mocxdb', autoCreate: false });
 
 app.listen(port, () => {
     console.log(`⚡️[server]: Server is running at https://localhost:${port}\n`);
-    require('console-stamp')(console);
+    console_stamp(console);
 });
 
 const personURL = '/api/person';

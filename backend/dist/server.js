@@ -19,6 +19,7 @@ const cors_1 = __importDefault(require("cors"));
 const Person_1 = __importDefault(require("./Person"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const express_validator_1 = require("express-validator");
+const console_stamp_1 = __importDefault(require("console-stamp"));
 const port = 8080;
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({ origin: 'http://localhost:3000' }));
@@ -28,7 +29,7 @@ const uri = 'mongodb+srv://mocx:mocx@cluster0.dqnkh6c.mongodb.net/?retryWrites=t
 mongoose_1.default.connect(uri, { dbName: 'mocxdb', autoCreate: false });
 app.listen(port, () => {
     console.log(`⚡️[server]: Server is running at https://localhost:${port}\n`);
-    require('console-stamp')(console);
+    (0, console_stamp_1.default)(console);
 });
 const personURL = '/api/person';
 const validateReq = (req, res, next) => {

@@ -35,6 +35,7 @@ const AddEditPersonPage = () => {
     const cpfError = () => formError && cpf.length !== 11;
     const nameError = () => formError && name.length === 0;
     const birthdateError = () => formError && !moment(birthdate, 'DD/MM/YYYY', true).isValid();
+
     useEffect(() => {
         if (personId) {
             (async () => {
@@ -73,8 +74,9 @@ const AddEditPersonPage = () => {
             'name': name,
             'birthdate': momnt.toDate()
         }
-        if (personId !== undefined) bodyForPost['_id'] = personId;
-        const newOrUpdate = personId !== undefined ? 'update' : 'new';
+        if (personId !== undefined)
+            bodyForPost['_id'] = personId;
+        const newOrUpdate = personId === undefined ? 'new' : 'update';
         const res = await fetch('http://localhost:8080/api/person/' + newOrUpdate, {
             method: 'POST',
             headers: {
@@ -84,7 +86,7 @@ const AddEditPersonPage = () => {
         });
         if (res.status === 400) {
             const data = await res.json();
-            if (data['cpf'] &&  data['cpf']['name'] === 'ValidatorError') {
+            if (data['cpf'] && data['cpf']['name'] === 'ValidatorError') {
                 setAlertError('CPF inserido não é um valor válido segundo ' +
                     'as regras brasileiras.')
             }

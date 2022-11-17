@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-const validateCpf = (cpf: String) : Boolean => {
+const validateCpf = (cpf: string) : boolean => {
     const digitsOnly = /^[0-9]+$/.test(cpf.toString());
     if (!digitsOnly ||
         cpf == '' ||
